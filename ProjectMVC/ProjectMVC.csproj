@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="MainPage\Main.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="MainPage\Main.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Avatars\1.png" />
+    <None Include="wwwroot\Avatars\10.png" />
+    <None Include="wwwroot\Avatars\11.png" />
+    <None Include="wwwroot\Avatars\12.png" />
+    <None Include="wwwroot\Avatars\2.png" />
+    <None Include="wwwroot\Avatars\3.png" />
+    <None Include="wwwroot\Avatars\4.png" />
+    <None Include="wwwroot\Avatars\5.png" />
+    <None Include="wwwroot\Avatars\6.png" />
+    <None Include="wwwroot\Avatars\7.png" />
+    <None Include="wwwroot\Avatars\8.png" />
+    <None Include="wwwroot\Avatars\9.png" />
+    <None Include="wwwroot\MainPage\notOkay.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.32" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.32" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.32" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.32">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.5" />
+  </ItemGroup>
+
+</Project>

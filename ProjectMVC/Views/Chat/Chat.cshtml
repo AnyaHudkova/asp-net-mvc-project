@@ -1,0 +1,135 @@
+﻿@{
+    Layout = "/Views/Account/MainLayout.cshtml";
+}
+
+@model ProjectMVC.Models.MessagesView
+
+
+@{
+    string randomImage()
+    {
+        Random rnd = new Random();
+        int n = rnd.Next(1, 16);
+        string rndImg = "/Avatars/" + n + ".png";
+        return rndImg;
+    }
+
+}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="refresh" content="30">
+    <title>@Model.Chat.Name</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb7xOLJAqp2w9n0fM8T595phvts_4W80qexg&usqp=CAU');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        .chat-page {
+            background-color: #fff;
+            max-width: 700px;
+            margin: 0 auto;
+            height: 650px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .message-list {
+            height: 400px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        .message-item {
+            margin-bottom: 10px;
+            padding: 5px;
+            background-color: #F5F5DC;
+            border-radius: 5px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+            .message-item .sender {
+                font-weight: bold;
+            }
+
+                .message-item .sender img {
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    margin-right: 5px;
+                }
+            .message-item .timestamp {
+                font-size: 12px;
+                color: #666;
+                margin-right: auto
+            }
+        .message-input {
+            margin-top: 20px;
+        }
+            .message-input textarea {
+                width: 100%;
+                height: 60px;
+                resize: none;
+            }
+            .message-input button {
+                margin-top: 10px;
+                font-size: 16px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                border-radius: 5px;
+                margin-bottom: 20px;
+                align-content: center;
+                background-color: #F5E0F1;
+            }
+
+                .message-input button:hover {
+                    background-color: #DB7093;
+                    color: white;
+                }
+    </style>
+
+</head>
+<body>
+    
+    <div class="chat-page">
+        <h3>@Model.Chat.Name</h3>
+        <form>
+            <a asp-controller="Chat" asp-action="AddFriends" asp-route-id="@Model.Chat.Id">Add friends</a>
+        </form>
+        <div class="message-list">
+
+
+            @foreach (var item in Model.List)
+            {
+
+                <div class="message-item">
+                    <div class="sender">
+                        <img src="@randomImage()" alt="avatar">
+                        @item.User.Username
+                    </div>
+                    <div class="timestamp">@item.Message.Date</div>
+                    <div class="content">@item.Message.MessageText</div>
+                </div>
+
+            }
+
+
+        </div>
+        <form method="post">
+            <div class="message-input">
+                <textarea placeholder="Enter your message..." name="messageText"></textarea>
+                <button asp-controller="Chat" asp-action="SendMessage" asp-route-id="@Model.Chat.Id">Send message</button>
+            </div>
+        </form>
+
+
+    </div>
+    
+</body>
+
+
+
+

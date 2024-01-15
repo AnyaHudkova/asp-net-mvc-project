@@ -1,0 +1,105 @@
+﻿@{
+    Layout = "/Views/Account/MainLayout.cshtml";
+}
+
+@model ProjectMVC.Models.AccountViewModel
+
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@Model.AccountUser.Username</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb7xOLJAqp2w9n0fM8T595phvts_4W80qexg&usqp=CAU');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .profile {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .profile-header img {
+            width: 100px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .profile-posts {
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        .post {
+            width: 600px;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #F5F5DC;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile">
+        <div class="profile-header">
+            <img src=@Model.ProfileImage alt="Avatar" style="width:200px">
+            <div class="profile-info">
+                <h2>@Model.AccountUser.Username</h2>
+                <h4>Age: @Model.AccountUser.Age</h4>
+                @{
+                    if (Model.AccountUser.Psycologist)
+                    {
+                        <h4>Psycologist</h4>
+                    }
+                    if (Model.AreFriends)
+                    {
+                        <a asp-controller="Friends" asp-action="DeleteFriend" asp-route-id="@Model.AccountUser.Id">Delete from friends</a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Friends" asp-action="AddFriend" asp-route-id="@Model.AccountUser.Id">Add to friends</a>
+                    }
+                        
+                }
+                
+            </div>
+        </div>
+
+
+        <div class="profile-posts">
+
+            @foreach (Post post in Model.Posts)
+            {
+                <div class="post">
+                    <h4>@post.Theme</h4>
+                    <p>@post.Content</p>
+                    <p>@post.Date</p>
+                </div>
+            }
+
+
+        </div>
+    </div>
+</body>
+

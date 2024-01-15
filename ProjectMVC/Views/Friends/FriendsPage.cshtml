@@ -1,0 +1,109 @@
+﻿@{
+    Layout = "/Views/Account/MainLayout.cshtml";
+}
+
+
+@{
+    string randomImage()
+    {
+        Random rnd = new Random();
+        int n = rnd.Next(1, 16);
+        string rndImg = "/Avatars/" + n + ".png";
+        return rndImg;
+    }
+}
+
+@model ProjectMVC.Models.FriendsViewModel
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>My friends</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb7xOLJAqp2w9n0fM8T595phvts_4W80qexg&usqp=CAU');
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+            }
+
+            .friends-page {
+                max-width: 700px;
+                margin: 0 auto;
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                display: flex;
+                flex-direction: column;
+                
+            }
+            
+            .friends-page ul {
+                list-style-type: none;
+                padding: 0;
+            }
+            .friends-page li {
+                margin-bottom: 10px;
+                display: flex;
+                align-items: center;
+            }
+            .friends-page img {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+            .friends-info {
+                display: flex;
+                align-items: center;
+                margin-right: 10px;
+            }
+            .actions {
+                margin-left: auto;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="friends-page">
+            <h3>Your friends:</h3>
+            <ul id="friend-list">
+
+                @foreach (var friend in Model.UserFriends)
+                {
+                    <li>
+                        <div class="friend-info">
+                            <img src="@randomImage()" alt="avatar">
+                            <a asp-action="FriendAccount" asp-route-id="@friend.Id">@friend.Username</a>
+                        </div>
+                        <div class="actions">
+                            <a asp-action="DeleteFriend" asp-route-id="@friend.Id">Delete</a>
+                        </div>
+                    </li>
+                }
+            </ul>
+            
+                <h3>Recommendations:</h3>
+                <ul id="friend-list">
+
+                    @foreach (var notFriend in Model.UserNotFriends)
+                    {
+                        <li>
+                            <div class="friend-info">
+                                <img src="@randomImage()" alt="avatar">
+                                <a asp-action="FriendAccount" asp-route-id="@notFriend.Id">@notFriend.Username</a>
+                            </div>
+                            <div class="actions">
+                                <a asp-action="AddFriend" asp-route-id="@notFriend.Id">Add to friends</a>
+                            </div>
+                        </li>
+                    }
+
+                </ul>
+        </div>
+    </body>
+
+
+
+

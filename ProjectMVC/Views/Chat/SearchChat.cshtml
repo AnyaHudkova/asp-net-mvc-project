@@ -1,0 +1,82 @@
+﻿@{
+    Layout = "/Views/Account/MainLayout.cshtml";
+}
+
+
+@model ProjectMVC.Models.ChatsViewModel
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chats</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb7xOLJAqp2w9n0fM8T595phvts_4W80qexg&usqp=CAU');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .chats-page {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+            .chats-page ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            .chats-page li {
+                margin-bottom: 10px;
+                display: flex;
+                align-items: center;
+            }
+
+
+        .chats-info {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+        }
+
+        .actions {
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <div class="chats-page">
+
+            <h3>Public chats:</h3>
+            <ul id="chat-list">
+
+                @foreach (var chat in Model.PublicChats)
+                {
+                    if(chat.Name.Contains(Model.Query, StringComparison.OrdinalIgnoreCase)) { 
+                    <li>
+                        <div class="chat-info">
+                            <a asp-action="Chat" asp-route-id="@chat.Id">@chat.Name</a>
+                        </div>
+                        <div class="actions">
+                            <a asp-action="AddChat" asp-route-id="@chat.Id">Add chat</a>
+                        </div>
+                    </li>
+                    }
+                }
+            </ul>
+        </div>
+    </form>
+</body>
+
+
+
+
+

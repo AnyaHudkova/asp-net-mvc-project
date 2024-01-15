@@ -1,0 +1,81 @@
+﻿@{
+    Layout = "/Views/Admin/AdminLayout.cshtml";
+}
+
+@model IEnumerable<User>
+
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Users</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb7xOLJAqp2w9n0fM8T595phvts_4W80qexg&usqp=CAU');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .users-page {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .users-page ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .users-page li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .users-info {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+        }
+
+        .actions {
+            margin-left: auto;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="users-page">
+        <h3>Users:</h3>
+        <ul id="user-list">
+            @foreach (var user in Model)
+            {
+                <li>
+                    <div class="user-info">
+                        <a asp-action="FriendAccount" asp-controller="Friends" asp-route-id="@user.Id">@user.Username</a>
+                    </div>
+                    <div class="actions">
+                        @if(user.Blocked){
+                        <a asp-action="UnblockUser" asp-route-id="@user.Id">Unblock</a>
+
+                        }
+                        @if(!user.Blocked){
+
+                        <a asp-action="BlockUser" asp-route-id="@user.Id">Block</a>
+                        }
+
+                    </div>  
+                </li>
+            }
+        </ul>
+     </div>
+</body>
+
+

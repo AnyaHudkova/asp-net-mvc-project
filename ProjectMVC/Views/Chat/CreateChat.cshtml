@@ -1,0 +1,65 @@
+﻿@{
+    Layout = "/Views/Account/MainLayout.cshtml";
+}
+@model ProjectMVC.Models.Chat
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb7xOLJAqp2w9n0fM8T595phvts_4W80qexg&usqp=CAU');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .chat-page {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+            .chat-page button {
+                background-color: #F5E0F1;
+                font-size: 16px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                border-radius: 5px;
+                margin-bottom: 20px;
+            }
+
+                .chat-page button:hover {
+                    background-color: #DB7093;
+                    color: white;
+                }
+    </style>
+</head>
+<body>
+    <form method="post">
+
+        <div class="chat-page">
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="PrivateChat" /> @Html.DisplayNameFor(model => model.PrivateChat)
+                </label>
+            </div>
+            <div class="form-group">
+                <button asp-controller="Chat" asp-action="CreateChat">Create chat</button>
+            </div>
+
+            <a asp-action="ChatsPage">Back to chats</a>
+        </div>
+    </form>
+</body>
+
+

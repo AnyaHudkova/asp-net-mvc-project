@@ -1,0 +1,104 @@
+﻿@{
+    Layout = "/Views/Account/MainLayout.cshtml";
+}
+
+@model IEnumerable<PostsViewModel>
+
+
+@{
+    string randomImage()
+    {
+        Random rnd = new Random();
+        int n = rnd.Next(1, 16);
+        string rndImg = "/Avatars/" + n + ".png";
+        return rndImg;
+    }
+
+}
+
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Posts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb7xOLJAqp2w9n0fM8T595phvts_4W80qexg&usqp=CAU');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .posts-page {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            
+            align-items: center;
+        }
+
+        .post {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #F5F5DC;
+            border-radius: 5px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .posts-page ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+       
+
+        .posts-page img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .posts-info {
+            margin-bottom: 10px;
+            align-items: center;
+            margin-right: 10px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="posts-page">
+        <ul id="post-list">
+                @foreach (var post in Model)
+                {
+
+                <li>
+
+                    <div class="posts-info">
+                        <img src="@randomImage()" alt="avatar">
+                        <a asp-action="FriendAccount" asp-controller="Friends" asp-route-id="@post.User.Id">@post.User.Username</a>
+           
+                    </div>
+                        <div class="post">
+                            <h4>@post.Post.Theme</h4>
+                            <p>@post.Post.Content</p>
+                            <p>@post.Post.Date</p>
+                        </div>
+                    
+
+                </li>
+            }
+        
+        </ul>
+     </div>
+</body>
+
+

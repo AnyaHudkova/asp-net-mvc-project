@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+
+    <style>
+        .search-form input {
+            border-radius: 5px;
+            margin-left: auto;
+            background-color: #E6E6FA;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+    </style>
+
+
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div class="search-form">
+                    <form method="GET">
+                        <input type="text" name="query" placeholder="Search chat" />
+                        <input type="submit" name ="search" value="Search" asp-controller="Chat" asp-action="SearchChat" />
+                    </form>
+                </div>
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="AccountPage">My page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Posts">Posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Friends" asp-action="FriendsPage">Friends</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="ChatsPage">Messages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogOut">Log out</a>
+                    </li>
+                </ul>
+                
+            </div>
+     
+    </nav>
+
+    <div>
+    @RenderBody()
+    </div>
+
+</body>
+</html>
+
